@@ -1,0 +1,30 @@
+Package: aliases2entrez
+Title: Converts Human gene symbols to entrez IDs
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Raphaël",
+           family = "Bonnet",
+           role = c("aut", "cre"),
+           email = "raphael.bonnet@univ-cotedazur.fr",
+           comment="Université Côte d’Azur"),
+      person(given = "Jean-François",
+           family = "Peyron",
+           role = c("aut"),
+           comment="Inserm")
+           )
+Description: Converts human gene symbols (aliases, previous symbols or synonyms) to entrezID.
+BugReports: https://github.com/peyronlab/aliases2entrez/issues
+Imports:
+    doParallel,
+    limma,
+    utils,
+    org.Hs.eg.db,
+    AnnotationDbi,
+    parallel,
+    foreach,
+    readr,
+    RCurl
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
