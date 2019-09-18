@@ -7,10 +7,10 @@
 #' @import org.Hs.eg.db
 #' @importFrom  AnnotationDbi mapIds
 #'
-#' @title Multi ressources gene symbols conversion to entrez ID
+#' @title Multi ressources gene symbols conversion to entrez ID (Human)
 #' @description
 #' This function is used to convert gene symbols, previous symbols or aliases to gene entrez ID\cr
-#' It performs :
+#' It performs :\cr
 #' -a gene query to limma::alias2Symbol to map gene alias to official symbols\cr
 #' -looks for LOC* symbols\cr
 #' -tries to find correspondance wihtin HGNC database\cr
@@ -35,7 +35,7 @@
 #'
 
 
-convert_symbols <- function(symbols, HGNC, c = 2) {
+convert_symbols <- function(symbols, HGNC, c = 1) {
   genes <- symbols
   expected <- c("Approved.symbol", "Previous.symbols", "Synonyms", "NCBI.Gene.ID")
   if (dim(HGNC)[2] != 4) {

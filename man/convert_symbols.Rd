@@ -2,7 +2,7 @@
 % Please edit documentation in R/convert_symbols.R
 \name{convert_symbols}
 \alias{convert_symbols}
-\title{Multi ressources gene symbols conversion to entrez ID}
+\title{Multi ressources gene symbols conversion to entrez ID (Human)}
 \usage{
 convert_symbols(symbols,HGNC,c=2)
 }
@@ -18,7 +18,7 @@ returns a vector containing IDs if match was found or NA if unknown or withdrawn
 }
 \description{
 This function is used to convert gene symbols, previous symbols or aliases to gene entrez ID\cr
-It performs :
+It performs :\cr
 -a gene query to limma::alias2Symbol to map gene alias to official symbols\cr
 -looks for LOC* symbols\cr
 -tries to find correspondance wihtin HGNC database\cr
