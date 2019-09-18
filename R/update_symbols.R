@@ -2,10 +2,12 @@
 #' @import RCurl
 #' @import readr
 #'
-#' @title Update last HGNC correspondance database
+#' @title Update last HGNC correspondence database
 #' @description
-#' This function is used to update gene symbol correspondance from HGNC database
+#' This function is used to update gene symbol correspondence from HGNC database
 #' @name update_symbols
+#' @usage
+#' update_symbols(url=NULL)
 #' @param url user can provide url (default is NULL)
 #' @examples
 #' HGNC <- update_symbols()

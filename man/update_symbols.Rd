@@ -2,9 +2,9 @@
 % Please edit documentation in R/update_symbols.R
 \name{update_symbols}
 \alias{update_symbols}
-\title{Update last HGNC correspondance database}
+\title{Update last HGNC correspondence database}
 \usage{
-update_symbols(url = NULL)
+update_symbols(url=NULL)
 }
 \arguments{
 \item{url}{user can provide url (default is NULL)}
@@ -13,7 +13,7 @@ update_symbols(url = NULL)
 returns a data.frame containing gene symbols with status, previous symbols and synonyms as well as their corresponding entrezIDs
 }
 \description{
-This function is used to update gene symbol correspondance from HGNC database
+This function is used to update gene symbol correspondence from HGNC database
 }
 \examples{
 HGNC <- update_symbols()

@@ -7,31 +7,31 @@
 #' @import org.Hs.eg.db
 #' @importFrom  AnnotationDbi mapIds
 #'
-#' @title Multi ressources gene symbols conversion to entrez ID (Human)
+#' @title Multi resources gene symbols conversion to entrez ID (Human)
 #' @description
 #' This function is used to convert gene symbols, previous symbols or aliases to gene entrez ID\cr
 #' It performs :\cr
 #' -a gene query to limma::alias2Symbol to map gene alias to official symbols\cr
 #' -looks for LOC* symbols\cr
-#' -tries to find correspondance wihtin HGNC database\cr
+#' -tries to find correspondence within HGNC database\cr
 #' -queries org.Hs.eg.db\cr
-#' -queries adaptative parsing (e.g. transforms BRCA-1 to BRCA1)
+#' -checks again with adaptive symbol parsing (e.g. transforms BRCA-1 to BRCA1)
 #'
 #' @name convert_symbols
 #' @usage
-#' convert_symbols(symbols,HGNC,c=2)
+#' convert_symbols(symbols,HGNC,c=1)
 #' @param symbols gene matrix from which rownames (gene symbols) are extracted
-#' @param HGNC HGNC correspondance file.
+#' @param HGNC HGNC correspondence file.
 #' @param c number of cores to use for parallel processes
 #' @examples
-#' # import the correspondance file
+#' # import the correspondence file
 #' file <- system.file("extdata", "HGNC.txt", package = "aliases2entrez")
 #' HGNC <- read.delim(file)
 #' # alterntatively update a new one with update_symbols()
 #' symbols <- c("BRCA1", "TP53")
 #' # run the main function
 #' ids <- convert_symbols(symbols, HGNC)
-#' @return returns a vector containing IDs if match was found or NA if unknown or withdrawn symbol
+#' @return returns a vector containing IDs if match were found or NA if unknown or withdrawn symbol
 #'
 
 
@@ -39,9 +39,9 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   genes <- symbols
   expected <- c("Approved.symbol", "Previous.symbols", "Synonyms", "NCBI.Gene.ID")
   if (dim(HGNC)[2] != 4) {
-    stop("HGNC correspondance table was not load properly, please consider updating with HGNC=update_symbols()")
+    stop("HGNC correspondence table was not load properly, please consider updating with HGNC=update_symbols()")
   } else if (!identical(colnames(HGNC), expected)) {
-    stop("HGNC correspondance table was not load properly, please consider updating with HGNC=update_symbols()")
+    stop("HGNC correspondence table was not load properly, please consider updating with HGNC=update_symbols()")
   }
 
   cat("calling limma::alias2Symbol on provided data
@@ -129,7 +129,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
     aliases <- data.frame(Symbols = genes, entrezID = as.numeric(matched))
     return(aliases)
   }
-  cat(paste(length(i), " symbols remaining (after adaptative parsing on approved symbol)
+  cat(paste(length(i), " symbols remaining (after adaptive parsing on approved symbol)
 ", sep = ""))
 
   # match to second column: previous symbols (1 elements in column)
@@ -207,7 +207,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
     aliases <- data.frame(Symbols = genes, entrezID = as.numeric(matched))
     return(aliases)
   }
-  cat(paste(length(j), " symbols remaining (after adaptative parsing on previous symbol)
+  cat(paste(length(j), " symbols remaining (after adaptive parsing on previous symbol)
 ", sep = ""))
 
   # match to third column: Synonyms (1 elements in column)
@@ -229,7 +229,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   registerDoParallel(cl)
   g <- NULL
   l <- 0
-  # same as above parse each line (3rd column) look for correspondance
+  # same as above parse each line (3rd column) look for correspondence
   l <- foreach(g = seq_along(j2), .combine = cbind) %dopar% {
     # for each element not found get corresponding gene
     gene_to_find <- tolower(genes[j2[g]])
@@ -284,7 +284,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
     aliases <- data.frame(Symbols = genes, entrezID = as.numeric(matched))
     return(aliases)
   }
-  cat(paste(length(k), " symbols remaining (after adaptative parsing on synonyms)
+  cat(paste(length(k), " symbols remaining (after adaptive parsing on synonyms)
 ", sep = ""))
 
 
@@ -295,7 +295,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
 
   other_ids <- mapIds(org.Hs.eg.db, symbols, "ENTREZID", "SYMBOL")
   if (sum(!(names(other_ids) == symbols)) != 0) {
-    warning("correspondance error")
+    warning("correspondence error")
   }
 
   cat("calling org.Hs.eg.db on remaining symbols\n")

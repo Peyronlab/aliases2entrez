@@ -2,31 +2,31 @@
 % Please edit documentation in R/convert_symbols.R
 \name{convert_symbols}
 \alias{convert_symbols}
-\title{Multi ressources gene symbols conversion to entrez ID (Human)}
+\title{Multi resources gene symbols conversion to entrez ID (Human)}
 \usage{
-convert_symbols(symbols,HGNC,c=2)
+convert_symbols(symbols,HGNC,c=1)
 }
 \arguments{
 \item{symbols}{gene matrix from which rownames (gene symbols) are extracted}
 
-\item{HGNC}{HGNC correspondance file.}
+\item{HGNC}{HGNC correspondence file.}
 
 \item{c}{number of cores to use for parallel processes}
 }
 \value{
-returns a vector containing IDs if match was found or NA if unknown or withdrawn symbol
+returns a vector containing IDs if match were found or NA if unknown or withdrawn symbol
 }
 \description{
 This function is used to convert gene symbols, previous symbols or aliases to gene entrez ID\cr
 It performs :\cr
 -a gene query to limma::alias2Symbol to map gene alias to official symbols\cr
 -looks for LOC* symbols\cr
--tries to find correspondance wihtin HGNC database\cr
+-tries to find correspondence within HGNC database\cr
 -queries org.Hs.eg.db\cr
--queries adaptative parsing (e.g. transforms BRCA-1 to BRCA1)
+-checks again with adaptive symbol parsing (e.g. transforms BRCA-1 to BRCA1)
 }
 \examples{
-# import the correspondance file
+# import the correspondence file
 file <- system.file("extdata", "HGNC.txt", package = "aliases2entrez")
 HGNC <- read.delim(file)
 # alterntatively update a new one with update_symbols()
