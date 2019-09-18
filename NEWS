@@ -1,0 +1,4 @@
+Changes in version 0.99.0 (2019-09-18)
++ Not submitted
+  o update_symbols : updates the HGNC database file
+  o convert_symbols : converts human gene symbols to entrezID
