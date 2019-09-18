@@ -10,7 +10,10 @@
 #' update_symbols(url=NULL)
 #' @param url user can provide url (default is NULL)
 #' @examples
+#'
+#' \donttest{
 #' HGNC <- update_symbols()
+#' }
 #' @return returns a data.frame containing gene symbols with status, previous symbols and synonyms as well as their corresponding entrezIDs
 #'
 

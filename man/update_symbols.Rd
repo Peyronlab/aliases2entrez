@@ -16,5 +16,8 @@ returns a data.frame containing gene symbols with status, previous symbols and s
 This function is used to update gene symbol correspondence from HGNC database
 }
 \examples{
+
+\donttest{
 HGNC <- update_symbols()
+}
 }

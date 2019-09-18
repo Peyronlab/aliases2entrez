@@ -1,8 +1,8 @@
 Package: aliases2entrez
 Title: Converts Human gene symbols to entrez IDs
-Version: 0.0.0.9000
+Version: 0.0.3
 Authors@R: 
-    c(person(given = "Raphaël",
+    c(person(given = "Raphael",
            family = "Bonnet",
            role = c("aut", "cre"),
            email = "raphael.bonnet@univ-cotedazur.fr",
