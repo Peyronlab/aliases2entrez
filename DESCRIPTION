@@ -1,6 +1,6 @@
 Package: aliases2entrez
 Title: Converts Human gene symbols to entrez IDs
-Version: 0.0.3
+Version: 0.0.6
 Authors@R: 
     c(person(given = "Raphael",
            family = "Bonnet",
@@ -12,7 +12,10 @@ Authors@R:
            role = c("aut"),
            comment="Inserm")
            )
-Description: Converts human gene symbols (aliases, previous symbols or synonyms) to entrezID.
+Description: Queries multiple resources authors HGNC (2019) <https://www.genenames.org>, authors limma (2015) <doi:10.1093/nar/gkv007> 
+    to find the correspondence between evolving nomenclature of human gene symbols, aliases, previous symbols or synonyms with 
+    stable, curated gene entrezID from NCBI database. This allows fast, accurate and up-to-date correspondence
+    between human gene expression datasets from various date and platform (e.g: gene symbol: BRCA1 - ID: 672).
 BugReports: https://github.com/peyronlab/aliases2entrez/issues
 Imports:
     doParallel,
