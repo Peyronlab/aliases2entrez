@@ -45,6 +45,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   } else if (!identical(colnames(HGNC), expected)) {
     stop("HGNC correspondence table was not load properly, please consider updating with HGNC=update_symbols()")
   }
+  genes<-gsub("[,;!?]","",genes)
 
   message("calling limma::alias2Symbol on provided data")
   genes <- ifelse(is.na(alias2SymbolTable(genes)), genes, alias2SymbolTable(genes))
