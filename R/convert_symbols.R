@@ -292,9 +292,6 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
 if (length(other_ids)==0){
   other_ids=rep(NA,length(symbols))
 }
-if (length(other_ids)==0){
-  other_ids=rep(NA,length(symbols))
-}
   if (sum(!(names(other_ids) == symbols)) != 0) {
     warning("correspondence error")
   }
