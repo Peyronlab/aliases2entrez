@@ -43,6 +43,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   } else if (!identical(colnames(HGNC), expected)) {
     stop("HGNC correspondence table was not load properly, please consider updating with HGNC=update_symbols()")
   }
+  genes<-gsub("[,;!?]","",genes)
 
   message("calling limma::alias2Symbol on provided data")
   genes <- ifelse(is.na(alias2SymbolTable(genes)), genes, alias2SymbolTable(genes))
@@ -279,8 +280,18 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   # other.
 
   symbols <- genes[which(is.na(matched))]
-
-  other_ids <- mapIds(org.Hs.eg.db, symbols, "ENTREZID", "SYMBOL")
+  other_ids <- tryCatch(
+  {suppressMessages(mapIds(org.Hs.eg.db, symbols,"ENTREZID", "SYMBOL"))
+  },
+  error=function(cond){
+    if (length(symbols)==1){
+      NA
+    }
+  }
+)
+if (length(other_ids)==0){
+  other_ids=rep(NA,length(symbols))
+}
   if (sum(!(names(other_ids) == symbols)) != 0) {
     warning("correspondence error")
   }
@@ -308,7 +319,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
 
   message(as.character(HGNC$Approved.symbol[with]))
 
-  message(paste(round(length(m1) / length(genes), 5), " of genes were not found:", sep = ""))
+  message(paste(round(length(m1) / length(genes), 5)*100, " of genes were not found:", sep = ""))
   warning(as.character(genes[m1]))
 
   aliases <- data.frame(Symbols = genes, entrezID = as.numeric(matched))
