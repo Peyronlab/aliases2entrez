@@ -29,7 +29,7 @@ It performs :\cr
 # import the correspondence file
 file <- system.file("extdata", "HGNC.txt", package = "aliases2entrez")
 HGNC <- read.delim(file)
-# alterntatively update a new one with update_symbols()
+# alternatively update a new one with update_symbols()
 symbols <- c("BRCA1", "TP53")
 # run the main function
 ids <- convert_symbols(symbols, HGNC)
