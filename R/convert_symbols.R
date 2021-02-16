@@ -300,7 +300,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   # other.
 
   symbols <- genes[which(is.na(matched))]
-<<<<<<< HEAD
+
   other_ids <- tryCatch(
   {suppressMessages(mapIds(org.Hs.eg.db, symbols,"ENTREZID", "SYMBOL"))
   },
@@ -313,25 +313,7 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
 if (length(other_ids)==0){
   other_ids=rep(NA,length(symbols))
 }
-=======
 
-  other_ids <- tryCatch(
-    {suppressMessages(mapIds(org.Hs.eg.db, symbols,"ENTREZID", "SYMBOL"))
-    },
-    error=function(cond){
-      if (length(symbols)==1){
-        NA
-      }
-    }
-  )
-  if (length(other_ids)==0){
-    other_ids=rep(NA,length(symbols))
-  }
-  if (length(other_ids)==0){
-    other_ids=rep(NA,length(symbols))
-  }
-
->>>>>>> 9570c7efe9cdbba2f9d9805841942c4b092e3307
   if (sum(!(names(other_ids) == symbols)) != 0) {
     warning("org.Hs.eg.db correspondence error")
   }
@@ -339,7 +321,6 @@ if (length(other_ids)==0){
   message(paste("-> matching ", length(k), " symbols to org.Hs.eg.db", sep = ""))
 
   matched[k] <- as.numeric(other_ids)
-
 
   m <- which(is.na(matched))
   if (length(m) == 0) {
@@ -370,15 +351,8 @@ if (length(other_ids)==0){
 
   message(paste(length(m), " symbols not found", sep = ""))
 
-<<<<<<< HEAD
-
-  message(paste(round(length(m) / length(genes), 5)*100, "% of genes were not found:", sep = ""))
-  warning(as.character(genes[m]))
-
-=======
   message(paste(round(length(m) / length(genes), 5)*100, "% of genes were not found:", sep = ""))
   message('Genes not found:\n', paste(as.character(genes[m]),collapse=','))
->>>>>>> 9570c7efe9cdbba2f9d9805841942c4b092e3307
 
   aliases <- data.frame(Symbols = genes, entrezID = as.numeric(matched))
 
