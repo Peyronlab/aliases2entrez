@@ -302,20 +302,17 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   symbols <- genes[which(is.na(matched))]
 
   other_ids <- tryCatch(
-    {suppressMessages(mapIds(org.Hs.eg.db, symbols,"ENTREZID", "SYMBOL"))
-    },
-    error=function(cond){
-      if (length(symbols)==1){
-        NA
-      }
+  {suppressMessages(mapIds(org.Hs.eg.db, symbols,"ENTREZID", "SYMBOL"))
+  },
+  error=function(cond){
+    if (length(symbols)==1){
+      NA
     }
-  )
-  if (length(other_ids)==0){
-    other_ids=rep(NA,length(symbols))
   }
-  if (length(other_ids)==0){
-    other_ids=rep(NA,length(symbols))
-  }
+)
+if (length(other_ids)==0){
+  other_ids=rep(NA,length(symbols))
+}
 
   if (sum(!(names(other_ids) == symbols)) != 0) {
     warning("org.Hs.eg.db correspondence error")
@@ -324,7 +321,6 @@ convert_symbols <- function(symbols, HGNC, c = 1) {
   message(paste("-> matching ", length(k), " symbols to org.Hs.eg.db", sep = ""))
 
   matched[k] <- as.numeric(other_ids)
-
 
   m <- which(is.na(matched))
   if (length(m) == 0) {
